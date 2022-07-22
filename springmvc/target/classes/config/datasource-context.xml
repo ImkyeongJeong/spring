@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 		
-	<mybatis-spring:scan base-package="com.company.mvc"/>
+	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- datasource connection pool -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
@@ -14,14 +14,8 @@
 	<property name="username" value="hr" />
 	<property name="password" value="hr" />
 	</bean>
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-	<constructor-arg ref="hikariConfig" />
-	</bean>
 	
-	<!-- mybatis SqlSessionFactory -->
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
-	<!-- Mybatis Config위치 잡아주는 것 객체로 할거면 ref, 값을 넣을거면 value-->
-	<property name="dataSource" ref="dataSource"/>
-	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
 	</bean>
 </beans>

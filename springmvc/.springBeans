@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/resources/test.xml</config>
+		<config>src/main/resources/config/mybatis-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
