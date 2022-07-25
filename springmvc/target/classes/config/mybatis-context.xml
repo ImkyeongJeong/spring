@@ -8,8 +8,9 @@
 	<!-- mybatis SqlSessionFactory -->
 	<!-- Mybatis Config위치 잡아주는 것 객체로 할거면 ref, 값을 넣을거면 value-->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
-	<property name="dataSource" ref="dataSource"/>
-	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
 	</bean>
 	
 	<mybatis-spring:scan base-package="com.company.mvc"/>
