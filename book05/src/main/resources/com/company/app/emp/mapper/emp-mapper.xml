@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.app.emp.mapper.BookMapper">
+	  
+	<select id="getBookList" resultType="BookVO">
+		SELECT *
+		 FROM book_tbl_06
+		 ORDER BY BOOK_NO
+	</select>
+	
+	<insert id="insert">
+ 	<selectKey keyProperty="bookNo" order="BEFORE" resultType="Long">
+			select nvl(max(book_no),0)+1 from book_tbl_06
+	</selectKey>
+		
+		INSERT INTO 
+		   book_tbl_06
+		      VALUES (
+		                #{bookNo},
+		                #{bookName},
+		                #{bookConverimg},
+		                #{bookDate},
+		                #{bookPrice},
+		                #{bookPublisher},
+		                #{bookInfo}
+		             )
+	</insert>
+	
+	<select id="getRentList" resultType="BookRentVO">
+		select r.rent_no, b.book_name, sum(rent_price), rent_status
+		from book_tbl_06 b RIGHT JOIN rent_tbl_06 r
+		on b.book_no = r.book_no
+		where rent_status = 1
+		group by r.rent_no, b.book_name, rent_status;
+	</select>
+</mapper>
