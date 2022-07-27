@@ -17,6 +17,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
+		System.out.println("list service");
 		return mapper.getList(cri);
 	}
 

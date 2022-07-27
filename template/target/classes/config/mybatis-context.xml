@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- mybatis SqlSessionFactory -->
+	<!-- Mybatis Config위치 잡아주는 것 객체로 할거면 ref, 값을 넣을거면 value-->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath*:com/company/app/**/mapper/*.xml"></property>
+	</bean>
+	
+	<!-- DAO대신에 Mapper인터페이스 -> 상속받고 구현(프록시클래스) @Repository빈등록 쿼리가 있는 xml파일과 인터페이스만 넣어주면 알아서 mybatis가 알아서 다 해줌 -->
+	<mybatis-spring:scan base-package="com.company.app.**.mapper"/>
+</beans>

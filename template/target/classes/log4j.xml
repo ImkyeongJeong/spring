@@ -47,7 +47,7 @@
 	<!-- 항상 root가 제일 마지막이여야 하고 지정된 logger가 없으면 root에 따라 log표시 -->
 	<!-- Root Logger fatal < error < warn < info < debug < trace -->
 	<root>
-		<priority value="debug" />
+		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
 	

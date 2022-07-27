@@ -1,4 +1,4 @@
-package com.company.app.emp.board;
+package com.company.app.board;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
