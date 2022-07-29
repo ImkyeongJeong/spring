@@ -53,4 +53,54 @@
 		DELETE FROM employees
 		WHERE employee_id = #{employeeId}
 	</delete>
+	
+	<!-- column:테이블의 컬럼명, property:VO 1:1방식 -->
+   <resultMap type="EmpVO" id="empDeptMap">
+		<id column="employee_id" property="employeeId"/>
+		<result column="first_name" property="firstName"/>
+		<result column="last_name" property="lastName"/>
+		<association property="dept" javaType="Departments">
+			<id column="department_id" property="departmentId" />
+			<result column="department_name" property="departmentName"/>
+			<result column="manager_id" property="managerId"/>
+			<result column="location_id" property="locationId"/>
+		</association>
+	</resultMap>
+	
+	
+	<select id="getEmpDept" resultType="EmpVO">
+		SELECT E.EMPLOYEE_ID,
+			   E.FIRST_NAME,
+			   D.DEPARTMENT_NAME "dept.departmentName",
+			   D.MANAGER_ID "dept.managerId", 
+			   D.LOCATION_ID "dept.locationId"
+		 FROM EMPLOYEES E, DEPARTMENTS D
+		WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+	</select>
+	
+	
+	<!-- 1:다 방식 type: 담길 객체, id:resultMap 이름-->
+	<resultMap type="Departments" id="deptEmpsMap">
+		<id column="department_id" property="departmentId"/>
+		<result column="department_name" property="departmentName"/>
+		<result column="manager_id" property="managerId"/>
+		<result column="location_id" property="locationId"/>
+		<collection property="emp" ofType="EmpVO">
+			<id column="EMPLOYEE_ID" property="employeeId"/>
+			<result column="FIRST_NAME" property="firstName"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getDeptEmps" resultMap="deptEmpsMap">
+		SELECT E.EMPLOYEE_ID,
+			   E.FIRST_NAME,
+			   D.DEPARTMENT_ID,
+			   D.DEPARTMENT_NAME, 
+			   D.MANAGER_ID,
+			   D.LOCATION_ID
+		 FROM EMPLOYEES E, DEPARTMENTS D
+		WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+	</select>
+	
+	
 </mapper> 
